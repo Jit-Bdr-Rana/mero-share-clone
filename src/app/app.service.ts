@@ -8,7 +8,7 @@ export class AppService {
   constructor() {
    }
  public share=this.content.asObservable();
- updateDate(text){
+ updateDate(text:any){
   this.content.next(text);  
  }
 

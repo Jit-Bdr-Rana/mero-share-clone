@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "315fab90-85fe-4dc7-a11e-8af629028667"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -24,10 +27,11 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/sytles"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/styles/index.css"
             ],
             "scripts": []
           },
@@ -91,10 +95,11 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/styles"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/styles/index.css"
             ],
             "scripts": []
           }
