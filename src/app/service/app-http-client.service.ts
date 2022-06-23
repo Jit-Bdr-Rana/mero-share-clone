@@ -30,7 +30,7 @@ export class AppHttpClient {
    * @type {string}
    */
   public get<T>(uri: string, params = {}): Observable<T> {
-    return this.http.get<T>(this.perfixUri(uri), { params: params });
+    return this.http.get<T>(uri, { params: params });
   }
 
   /**
@@ -60,10 +60,10 @@ export class AppHttpClient {
    * @param {Object} Params Object
    * @type {string}
    */
-  public delete<T>(uri: string, params:any = {}): Observable<T> {
-    params['_method'] = 'DELETE';
-    return this.http.delete<T>(this.perfixUri(uri), params);
-  }
+  // public delete<T>(uri: string, params:any = {}): Observable<T> {
+  //   params['_method'] = 'DELETE';
+  //   return this.http.delete<T>(this.perfixUri(uri), params);
+  // }
 
   /**
    * Perpares Backedn URL with API Perfix

@@ -5,20 +5,25 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppService } from './app.service';
 import { LoginComponent } from './login/login.component';
-
+import { AppHttpClient } from './service/app-http-client.service';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    ForgetpasswordComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
      FormsModule,
-     ReactiveFormsModule
+     ReactiveFormsModule,
+     HttpClientModule,
+     BrowserAnimationsModule
   ],
-  providers: [AppService],
+  providers: [AppService,AppHttpClient],
   bootstrap: [AppComponent],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

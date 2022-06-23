@@ -1,0 +1,1418 @@
+<div class="justify-content-md-center mb-3">
+  <div class="mt-5"
+    [ngClass]="{'col-lg-10': currentRoute == 'likhatPrint', 'col-lg-12': currentRoute != 'likhatPrint'}">
+    <ng-template [ngIf]='likhatPrint!=null'>
+      <ng-template [ngIf]="this.likhatPrint['rokkaDetails']['PROCESSREGISTRATION']['applicationstatus']!=31">
+         <ngx-barcode style="position: absolute;left: 43px;top: 1px;" [bc-value]="actualRefNo" [bc-display-value]="true" [bc-height]="50"></ngx-barcode>
+      </ng-template>
+      <div id="header">
+        <div class="row justify-content-end">
+          <table style="width: 45%">
+            <tr>
+              <td width="40%">
+                टोकन/दर्ता नं. र मिति :
+                <!-- {{ actualRefNo | engToNep }} {{ printRefNo | engToNep }} - -->
+                <!-- {{ npDateConverter.ADtoBS(likhatPrint['regDetails']['dateofapplication']) | engToNep }} -->
+              </td>
+              <td width="25%">
+                रजिष्ट्रेशन नं. र मिति :
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div id="print-section" class="container-fluid">
+        <ul class="text-center default-list">
+          <li>
+            <b>अनुसूची – २२</b>
+          </li>
+          <li>
+            (दफा ३० को उपदफा (१३) सँग सम्बन्धित)
+          </li>
+          <!-- <li>
+            <b>पुनः नापी बमोजिमको जग्गा हाल साविकको लागि दिने निवेदनको ढाँचा </b>
+          </!-->
+        </ul>
+
+        <ul class="default-list">
+          <li>
+            श्रीमान् प्रमुख/मालपोत अधिकृतज्यू,
+          </li>
+          <li>
+            <div class="row justify-content-end"  *ngIf="(currentUser.get('isCompany') == 1) || (likhatPrint['childUserDetails'] && likhatPrint['childUserDetails'].length>0)">
+              <div class="col-4 text-right">
+                <span *ngIf="likhatPrint['serviceCenterDetail'] && likhatPrint['serviceCenterDetail'].length>0">भु-सेवा
+                  केन्द्रको (संस्थाको)
+                  नाम:
+                  <span *ngFor="let serviceCenter of likhatPrint['serviceCenterDetail']; let i = index;">
+                    {{serviceCenter['FIRSTNAME']!=null ? serviceCenter['FIRSTNAME'] : ''}}
+                    {{serviceCenter['MIDDLENAME']!=null ? serviceCenter['MIDDLENAME'] : ''}}
+                    {{serviceCenter['LASTNAME']!=null ? serviceCenter['LASTNAME'] : ''}}
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="row justify-content-end" *ngIf="(currentUser.get('isCompany') == 2) && likhatPrint['childUserDetails'] && likhatPrint['childUserDetails'].length == 0">
+              <div class="col-4 text-right">
+                <span *ngIf="likhatPrint['serviceCenterDetail'] && likhatPrint['serviceCenterDetail'].length>0">भु-सेवा
+                  केन्द्रको (व्यक्तिको)
+                  नाम:
+                  <span *ngFor="let serviceCenter of likhatPrint['serviceCenterDetail']; let i = index;">
+                    {{serviceCenter['FIRSTNAME']!=null ? serviceCenter['FIRSTNAME'] : ''}}
+                    {{serviceCenter['MIDDLENAME']!=null ? serviceCenter['MIDDLENAME'] : ''}}
+                    {{serviceCenter['LASTNAME']!=null ? serviceCenter['LASTNAME'] : ''}}
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="row justify-content-end">
+              <div class="col-4 text-right">
+                <span *ngIf="likhatPrint['childUserDetails'] && likhatPrint['childUserDetails'].length>0">भु-सेवा
+                  केन्द्रको (प्रयोगकर्ताको)
+                  नाम:
+                  <span *ngFor="let childUser of likhatPrint['childUserDetails']; let i = index;">
+                    {{childUser['CHILDNAME']!=null ? childUser['CHILDNAME'] : ''}}
+                    {{childUser['MIDDLENAME']!=null ? childUser['MIDDLENAME'] : ''}}
+                    {{childUser['LASTNAME']!=null ? childUser['LASTNAME'] : ''}}
+                  </span>
+                </span>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <p class="text-center">
+          <b>विषयः- <u>सट्टापट्टा ।</u></b>
+        </p>
+
+        <p>महोदय,</p>
+        <p class="text-justify" style="text-indent: 50px;">
+          लिखितम् मेरो /हाम्रो घरायसी................................/ ................................. कारणले हाम्रो
+          एकलौटी/ संयुक्त हकभोग भएको यस अघि अरु कसैलाई कुनै प्रकारको लिखत गरी नदिएको देहायमा लेखिए बमोजिमको मुल्य रु
+          ..........................अक्षरेपि .............................................................. पर्ने अचल
+          सम्पत्ति एक आपसमा सट्टापट्टा गर्नुपर्ने भएको हुँदा सट्टापट्टा भए बमोजिमको अचल सम्पत्ति आजैका मितिदेखि आ-आफुले
+          भोगचलन गर्न पाउने गरी हाम्रो मनोमान राजीखुसीले मालपोत कार्यालय
+          ............................/............................ मा बसी लेखी लेखार्इ सहिछाप समेत गरी यो सट्टापट्टाको
+          कागज गरी लियौँ/दियौँ ।
+        </p><br>
+
+        <div class="container-fluid">
+          <div class="row">
+            <ul class="default-list w-100">
+              <!--LANDOWNER 1 DETAILS-->
+              <li *ngIf="likhatPrint['sellerList'].length>0">
+                <p>सट्टापट्टा गर्ने दर्तावाला मध्येका श्री
+                  <b *ngFor="let landowner1 of likhatPrint['sellerList']; let i = index" class="dotted">
+                    <span *ngIf="i>0">, </span>
+                    {{(landowner1 != null && landowner1 != '')? landowner1["firstname"]: "___________________"}}
+                    {{(landowner1 != null && landowner1 != '')? landowner1["middlename"]: "___________________"}}
+                    {{(landowner1 != null && landowner1 != '')? landowner1["lastname"]: "___________________"}}
+                  </b>
+                  को विवरण र सहिछाप :- यो
+                  हक भोग छोड्न लागेको र यो लिखत बमोजिमको जग्गा समावेश गर्दा नेपाल राज्य भरमा मेरो र मेरो परिवारको नाममा
+                  हदबन्दी भन्दा बढी जग्गा छैन ।</p>
+                <span *ngFor="let landowner1 of likhatPrint['sellerList']; let i = index">
+                  <app-report-table [data]="landowner1" contactType="person" style="width: 100%"></app-report-table>
+                </span>
+              </li>
+              <!--LANDOWNER 1 DETAILS END-->
+
+              <!--LANDOWNER 1 ORGANIZATION DETAILS-->
+              <li *ngIf="likhatPrint['organizationSellerList'].length>0">
+                <p>सट्टापट्टा गर्ने दर्तावाला मध्येका
+                  <b *ngFor="let landowner1 of likhatPrint['organizationSellerList']; let i = index" class="dotted">
+                    <span *ngIf="i>0">, </span>
+                    {{landowner1["firstname"]}}
+                  </b>
+                  को विवरण र सहिछाप :- यो
+                  हक भोग छोड्न लागेको र यो लिखत बमोजिमको जग्गा समावेश गर्दा नेपाल राज्य भरमा मेरो र मेरो परिवारको नाममा
+                  हदबन्दी भन्दा बढी जग्गा छैन ।</p>
+                <!-- <span *ngFor="let landowner1 of likhatPrint['organizationSellerList']; let i = index">
+                  <app-report-table [data]="landowner1" contactType="person" style="width: 100%"></app-report-table>
+                </span> -->
+
+                <ng-container *ngFor="let sellerData of likhatPrint['organizationSellerList']">
+                  <table class="table table-bordered likhat-table">
+                    <tr>
+                      <td>
+                        नाम, थर (देवनागरीमा):-
+                        <b>{{ sellerData["firstname"] ? sellerData["firstname"] : "" }}
+                        </b>
+                      </td>
+                      <td>
+                        नाम, थर (अङ्ग्रेजीमा):-
+                        <b>{{
+                          sellerData["firstnameenglish"] ? sellerData["firstnameenglish"] : ""
+                        }}</b>
+                      </td>
+                      <td>
+
+                      </td>
+                      <td rowspan="3" style="width: 220px;">
+                        <p>दस्तखत:- ................................</p>
+                        <div class="box">
+                          <div class="left"></div>
+                          <p>दायाँ</p>
+                        </div>
+                        <div class="box">
+                          <div class="right"></div>
+                          <p>बायाँ</p>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        ठेगाना:-
+                        <b>{{ sellerData["munvdcname"] ? sellerData["munvdcname"] : "" }} -
+                          {{ sellerData["wardnumber"] ? (sellerData["wardnumber"] | engToNep) : "" }}
+                          {{ sellerData["villagetole_np"] ? sellerData["villagetole_np"] : "" }},
+                          {{ sellerData["districtname"] ? sellerData["districtname"] : "" }}</b>
+                      </td>
+                      <td>
+
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>
+                          दर्ता नं :-
+                          <b>{{ sellerData["idno"] ? (sellerData["idno"] | engToNep) : "" }}</b>
+                        </p>
+                        <p>
+                          दर्ता मिति (वि.सं.) :-
+                          <b>{{ sellerData["issuedate"] ? (npDateConverter.ADtoBS(sellerData["issuedate"]) | engToNep) : "" }}</b>
+                        </p>
+                      </td>
+                      <td>
+                        दर्ता गर्ने कार्यालय र स्थान:-
+                        <b>
+                          {{ sellerData["issuingagency"] ? sellerData["issuingagency"] : '' }}
+                          {{ sellerData["idissueplace"] ? sellerData["idissueplace"] : "" }}
+                        </b>
+                      </td>
+                      <td>
+                        <p>
+                          जग्गाधनी सङ्केत नं :<b>{{
+                          sellerData["orglinNumber"] ? sellerData["orglinNumber"] : ""
+                        }}</b>
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </ng-container>
+
+              </li>
+              <!--LANDOWNER 1 ORGANIZATION DETAILS END-->
+
+              <!--LANDOWNER 2 DETAILS-->
+              <li *ngIf="likhatPrint['buyerList'].length>0">
+                <p>सट्टापट्टा गर्ने दर्तावाला मध्येका श्री
+                  <b *ngFor="let landowner2 of likhatPrint['buyerList']; let i = index" class="dotted">
+                    <span *ngIf="i>0">, </span>
+                    {{(landowner2 != null && landowner2 != '')? landowner2["firstname"]: "___________________"}}
+                    {{(landowner2 != null && landowner2 != '')? landowner2["middlename"]: "___________________"}}
+                    {{(landowner2 != null && landowner2 != '')? landowner2["lastname"]: "___________________"}}
+                  </b>
+                  को विवरण र सहिछाप :- यो
+                  हक भोग छोड्न लागेको र यो लिखत बमोजिमको जग्गा समावेश गर्दा नेपाल राज्य भरमा मेरो र मेरो परिवारको नाममा
+                  हदबन्दी भन्दा बढी जग्गा छैन ।</p>
+                <span *ngFor="let landowner2 of likhatPrint['buyerList']; let i = index">
+                  <app-report-table [data]="landowner2" contactType="person" style="width: 100%"></app-report-table>
+                </span>
+              </li>
+              <!--LANDOWNER 2 DETAILS END-->
+
+              <!--LANDOWNER 2 ORGANIZATION DETAILS-->
+              <li *ngIf="likhatPrint['organizationBuyerList'].length>0">
+                <p>सट्टापट्टा गर्ने दर्तावाला मध्येका
+                  <b *ngFor="let landowner1 of likhatPrint['organizationBuyerList']; let i = index" class="dotted">
+                    <span *ngIf="i>0">, </span>
+                    {{landowner1["firstname"]}}
+                  </b>
+                  को विवरण र सहिछाप :- यो
+                  हक भोग छोड्न लागेको र यो लिखत बमोजिमको जग्गा समावेश गर्दा नेपाल राज्य भरमा मेरो र मेरो परिवारको नाममा
+                  हदबन्दी भन्दा बढी जग्गा छैन ।</p>
+                <!-- <span *ngFor="let landowner1 of likhatPrint['organizationBuyerList']; let i = index">
+                  <app-report-table [data]="landowner1" contactType="person" style="width: 100%"></app-report-table>
+                </span> -->
+
+                <ng-container *ngFor="let sellerData of likhatPrint['organizationBuyerList']">
+                  <table class="table table-bordered likhat-table">
+                    <tr>
+                      <td>
+                        नाम, थर (देवनागरीमा):-
+                        <b>{{ sellerData["firstname"] ? sellerData["firstname"] : "" }}
+                        </b>
+                      </td>
+                      <td>
+                        नाम, थर (अङ्ग्रेजीमा):-
+                        <b>{{
+                          sellerData["firstnameenglish"] ? sellerData["firstnameenglish"] : ""
+                        }}</b>
+                      </td>
+                      <td>
+
+                      </td>
+                      <td rowspan="3" style="width: 220px;">
+                        <p>दस्तखत:- ................................</p>
+                        <div class="box">
+                          <div class="left"></div>
+                          <p>दायाँ</p>
+                        </div>
+                        <div class="box">
+                          <div class="right"></div>
+                          <p>बायाँ</p>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        ठेगाना:-
+                        <b>{{ sellerData["munvdcname"] ? sellerData["munvdcname"] : "" }} -
+                          {{ sellerData["wardnumber"] ? (sellerData["wardnumber"] | engToNep) : "" }}
+                          {{ sellerData["villagetole_np"] ? sellerData["villagetole_np"] : "" }},
+                          {{ sellerData["districtname"] ? sellerData["districtname"] : "" }}</b>
+                      </td>
+                      <td>
+
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <p>
+                          दर्ता नं :-
+                          <b>{{ sellerData["idno"] ? (sellerData["idno"] | engToNep) : "" }}</b>
+                        </p>
+                        <p>
+                          दर्ता मिति (वि.सं.) :-
+                          <b>{{ sellerData["issuedate"] ? (npDateConverter.ADtoBS(sellerData["issuedate"]) | engToNep) : "" }}</b>
+                        </p>
+                      </td>
+                      <td>
+                        दर्ता गर्ने कार्यालय र स्थान:-
+                        <b>
+                          {{ sellerData["issuingagency"] ? sellerData["issuingagency"] : '' }}
+                          {{ sellerData["idissueplace"] ? sellerData["idissueplace"] : "" }}
+                        </b>
+                      </td>
+                      <td>
+                        <p>
+                          जग्गाधनी सङ्केत नं :<b>{{
+                          sellerData["orglinNumber"] ? sellerData["orglinNumber"] : ""
+                        }}</b>
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </ng-container>
+              </li>
+              <!--LANDOWNER 2 ORGANIZATION DETAILS END-->
+              <!-- witness table starts -->
+              <li *ngIf="likhatPrint['witnessList'] ? likhatPrint['witnessList'].length>0 : false">
+                <p>
+                  <b>
+                    साक्षीको विवरण र सहिछाप:
+                  </b>
+                </p>
+                <ng-container *ngFor="let witnessDate of likhatPrint['witnessList']">
+                  <table class="table table-bordered likhat-table">
+                    <tr>
+                      <td>
+                        नाम, थर (देवनागरीमा):-
+                        <b>{{ witnessDate["firstname"] }}
+                          {{ witnessDate["middlename"] }}
+                          {{ witnessDate["lastname"] }}</b>
+                      </td>
+                      <td>
+                        नाम, थर (अङ्ग्रेजीमा):-
+                        <b>{{ witnessDate["firstnameenglish"] }}
+                          {{ witnessDate["middlenameenglish"] }}
+                          {{ witnessDate["lastnameenglish"] }}</b>
+                      </td>
+                      <td>
+                        जन्म मिति:-
+                        <b>{{
+                          witnessDate["dateofbrith"]
+                        }}</b>
+                      </td>
+                      <td rowspan="4" style="width: 220px;">
+                        <p>दस्तखत:- ................................</p>
+                        <div class="box">
+                          <div class="left"></div>
+                          <p>दायाँ</p>
+                        </div>
+                        <div class="box">
+                          <div class="right"></div>
+                          <p>बायाँ</p>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                        ठेगाना:-
+                        <b>{{ witnessDate["munvdcname"] }}-
+                          {{ witnessDate["wardnumber"] }},
+                          {{ witnessDate["districtname"] }}</b>
+                      </td>
+                      <td>
+                        लिङ्ग:-
+                        <b>{{ witnessDate["gender"] }}</b>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        नागरिकता नं :-
+                        <b>{{ witnessDate["idno"] }}</b>
+                        <br>
+                        जारी मिति :-
+                        <b>{{ witnessDate["issuedate"] }}</b>
+                      </td>
+                      <td>
+                        नागरिकता जारी गर्ने कार्यालय र स्थान:-
+                        <b>
+                          {{ witnessDate["issuingagency"] }},
+                          {{ witnessDate["idissueplace"] }}</b>
+                      </td>
+                      <td>
+                        बिक्रीकर्ता/खरिदकर्तासंगको नाता:<b>{{ witnessDate["relationwithlandowner"] ? witnessDate["relationwithlandowner"] : ""
+                        }}</b>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        पति/पत्नीको नाम:-
+                        <b>{{ witnessDate["husbandfirstname"] }}
+                          {{ witnessDate["husbandmiddlename"] }}
+                          {{ witnessDate["husbandlastname"] }}
+                          {{ witnessDate["wifename"] ? witnessDate["wifename"] : "" }}</b>
+                        <br>
+                        ससुराको नाम:-
+                        <b>{{ witnessDate["fatherinlawfirstname"] ? witnessDate["fatherinlawfirstname"]         : ""     }}
+                          {{ witnessDate["fatherinlawmiddlename"] ? witnessDate["fatherinlawmiddlename"]         : ""     }}
+                          {{ witnessDate["fatherinlawlastname"] ? witnessDate["fatherinlawlastname"] : ""     }}</b>
+                        
+                      </td>
+                      <td>
+                          बाबुको नाम:-
+                          <b>{{   witnessDate["fatherfirstname"] ? witnessDate["fatherfirstname"]     : "" }}
+                            {{   witnessDate["fathermiddlename"] ? witnessDate["fathermiddlename"]     : "" }}
+                            {{   witnessDate["fatherlastname"] ? witnessDate["fatherlastname"] : "" }}</b>
+                          <br>
+                          आमाको
+                          नाम:-<b>{{   witnessDate["motherfirstname"]     ? witnessDate["motherfirstname"]     : "" }}
+                            {{   witnessDate["mothermiddlename"]     ? witnessDate["mothermiddlename"]     : "" }}
+                            {{   witnessDate["motherlastname"] ? witnessDate["motherlastname"] : "" }}</b>
+                      </td>
+                      <td>
+                          बाजे/बजैको नाम:-
+                          <b>{{   witnessDate["grandfatherfirstname"]     ? witnessDate["grandfatherfirstname"]     : "" }}
+                            {{   witnessDate["grandfathermiddlename"]     ? witnessDate["grandfathermiddlename"]     : "" }}
+                            {{   witnessDate["grandfatherlastname"]     ? witnessDate["grandfatherlastname"]     : "" }}</b>
+                      </td>
+                    </tr>
+                  </table>
+                </ng-container>
+              </li>
+              <!-- witness table ends -->
+
+              <div class="pagebreak"></div>
+
+              <!--NOMINEE DETAILS FOR LANDOWNER1-->
+              <li class="after-pagebreak" *ngIf="likhatPrint['sellerNomineeList'].length>0">
+                <span *ngFor="let landOwner1Nom of likhatPrint['sellerNomineeList']">
+                  <p>लिखत अधिकृत वारिसबाट गरिने भए निजको विवरण र सहिछाप ( सट्टापट्टा गर्ने
+                    मध्ये ........................................................को हकमा)</p>
+                  <app-report-table [data]="landOwner1Nom" contactType="person" relationType={{appConstants.NOMINEE}}
+                    style="width: 100%">
+                  </app-report-table>
+                </span>
+              </li>
+              <!--NOMINEE DETAILS FOR LANDOWNER1 END-->
+
+              <!--NOMINEE DETAILS FOR LANDOWNER2-->
+              <li class="after-pagebreak" *ngIf="likhatPrint['buyerNomineeList'].length>0">
+                <span *ngFor="let landOwner2Nom of likhatPrint['buyerNomineeList']">
+                  <p>लिखत अधिकृत वारिसबाट गरिने भए निजको विवरण र सहिछाप ( सट्टापट्टा गर्ने
+                    मध्ये ........................................................को हकमा)</p>
+                  <app-report-table [data]="landOwner2Nom" contactType="person" relationType={{appConstants.NOMINEE}}
+                    style="width: 100%">
+                  </app-report-table>
+                </span>
+              </li>
+              <!--NOMINEE DETAILS FOR LANDOWNER2 END-->
+
+              <!--GUARDIAN DETAILS-->
+              <li class="after-pagebreak" *ngIf="likhatPrint['guardianList'].lenght>0">
+                <span *ngFor="let guardian of likhatPrint['guardianList']">
+                  <p>संरक्षक /माथबर चाहिनेमा निजको विवरण र सहिछाप ( दिने/लिने
+                    ........................................................को हकमा)</p>
+                  <app-report-table [data]="guardian" contactType="person" relationType={{appConstants.GUARDIAN}}
+                    style="width: 100%"></app-report-table>
+                </span>
+              </li>
+              <!--GUARDIAN DETAILS END-->
+
+              <!--LAND DETAILS-->
+              <p>सट्टापट्टा हुने जग्गाको विवरण :-</p>
+
+              <!--LANDOWNER1 LAND-->
+              <li>
+                <p>सट्टापट्टा गरी
+                  {{isLandownerOrganization(likhatPrint['sellerList'],likhatPrint['organizationSellerList'])!=true?'श्री': ''}}
+                  <b *ngFor="let landowner of likhatPrint['landDetails']['LANDOWNER1']; let i = index" class="dotted">
+                    <span *ngIf="i>0">, </span>
+                    {{(landowner != null && landowner != '')? landowner["property"]["FIRSTNAME"]: "___________________"}}
+                    {{(landowner != null && landowner != '')? landowner["property"]["MIDDLENAME"]: "___________________"}}
+                    {{(landowner != null && landowner != '')? landowner["property"]["LASTNAME"]: "___________________"}}
+                  </b>को नाममा दर्ता हुने जग्गा/घरजग्गाको विवरण:- स्वामित्व
+                  प्राप्त गरेको मिति....................... प्राप्त गरेको किसिम: राजीनामा/ अंशबण्डा/ नामसारी/अन्य </p>
+
+                <ng-container *ngFor="let landData of likhatPrint['landDetails']['LANDOWNER1']">
+                  <table class="table table-bordered d-table table-line-height">
+                    <tr>
+                      <td colspan="9">
+                        <p class="text-center">
+                          जग्गाको विवरण (स्रेस्ता बमोजिम)
+                        </p>
+                        प्रदेश _______________
+                        जिल्ला:-<b>{{landData['property']['DISTRICTNAME']? landData['property']['DISTRICTNAME']: ''}}</b>
+                      </td>
+
+                      <td colspan="4" class="text-center">
+                        कित्ताकाट भए
+                      </td>
+                      <td colspan="4" class="text-center">
+                        घरजग्गाको मुल्य (अङ्कमा) <br />
+                        <small>(घर र जग्गाको छुट्टा छुट्टै मुल्य राख्रु पर्ने छ)</small>
+                      </td>
+                      <td>
+                        कैफियत
+                      </td>
+                    </tr>
+                    <tr>
+                      <td rowspan="2">
+                        न. पा./गा. पा
+                      </td>
+                      <td rowspan="2">
+                        वार्ड नं.
+                      </td>
+                      <td rowspan="2">
+                        सिट नं.
+                      </td>
+                      <td rowspan="2" style="min-width: 20px;">
+                        कि. नं. (अङ्क र आक्षरमा)
+                      </td>
+                      <td rowspan="2">
+                        खण्डे
+                      </td>
+                      <td rowspan="2" style="min-width: 72px;">
+                        क्षेत्रफ़ल
+                      </td>
+                      <td rowspan="2">
+                        विरह
+                      </td>
+                      <td rowspan="2">
+                        किसिम
+                      </td>
+                      <td rowspan="2">
+                        मोहीको नाम, थर
+                      </td>
+                      <td rowspan="2" style="width: 85px;">
+                        तर्फ़
+                      </td>
+                      <td rowspan="2" style="width: 85px;">
+                        क्षेत्रफ़ल
+                      </td>
+                      <td rowspan="2" style="width: 150px;">
+                        हुनेवाला जग्गाधनी
+                      </td>
+                      <td rowspan="2" style="width: 85px;">
+                        मूल्य
+                      </td>
+
+                      <td colspan="2" class="text-center">
+                        खरिद
+                      </td>
+                      <td colspan="2" class="text-center">
+                        बिक्री
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        जग्गा
+                      </td>
+                      <td>
+                        घर
+                      </td>
+                      <td>
+                        जग्गा
+                      </td>
+                      <td>
+                        घर
+                      </td>
+                      <td></td>
+                    </tr>
+
+                    <tr *ngFor="let propertiesData of likhatPrint['landDetails']['LANDOWNER1']; index as i">
+                      <td>
+                        {{
+                        propertiesData['property']['MUNICIPALITYNAME'] ? propertiesData['property']['MUNICIPALITYNAME'] : ""
+                      }}
+                      </td>
+                      <td>
+                        {{
+                        propertiesData['property']['WARDNO'] ? (propertiesData['property']['WARDNO'] | engToNep): ""
+                      }}
+                      </td>
+                      <td>
+                        {{
+                          propertiesData['property']["MAPSHEET1"] ? (propertiesData['property']["MAPSHEET1"] | engToNep) : ""
+                        }}
+
+                        {{ propertiesData['property']["MAPSHEET2"] ? (propertiesData['property']["MAPSHEET2"] | engToNep) : "" }}
+
+                        {{ propertiesData['property']["MAPSHEET3"] ? (propertiesData['property']["MAPSHEET3"] | engToNep) : "" }}
+
+                        {{
+                          propertiesData['property']["MAPSHEET4"] ? (propertiesData['property']["MAPSHEET4"] | engToNep) : ""
+                        }}
+                      </td>
+                      <td>
+                        {{ propertiesData['property']["PRESENTPARCLENO"]
+                          ? (propertiesData['property']["PRESENTPARCLENO"])
+                          : "" }}
+                        <br />
+                        {{ propertiesData['property']["PRESENTPARCLENO"] | nepToEng | numToWords }}
+                      </td>
+                      <td>
+                        {{ propertiesData['property']["PARTNO"] ? propertiesData['property']["PARTNO"]: "" }}
+                      </td>
+                      <td>
+                        {{ propertiesData['property']["AREA1"] ? (propertiesData['property']["AREA1"] | engToNep) : "0" }}
+                        -
+                        {{ propertiesData['property']["AREA2"] ? (propertiesData['property']["AREA2"] | engToNep) : "0" }}
+                        -
+                        {{ propertiesData['property']["AREA3"] ? (propertiesData['property']["AREA3"] | engToNep) : "0" }}
+                        -
+                        {{ propertiesData['property']["AREA4"] ? (propertiesData['property']["AREA4"] | engToNep) : "0" }}
+                        <br />
+                        ({{ propertiesData['property']["AREA5"] ? (propertiesData['property']["AREA5"] | engToNep): "" }})
+                      </td>
+                      <td>
+                        {{ propertiesData['property']["LANDUSETYPE_NP"]
+                          ? propertiesData['property']["LANDUSETYPE_NP"]
+                          : "" }}
+                      </td>
+                      <td>
+                        {{
+                        propertiesData['property']["LANDTYPENP"] ? propertiesData['property']["LANDTYPENP"] : ""
+                      }}
+                      </td>
+                      <td>
+                        <ng-template
+                          [ngIf]="propertiesData['property']['tenantDetail'] && propertiesData['property']['tenantDetail']['tenantPersonDetail']">
+                          <ng-container
+                            *ngFor="let tenant of propertiesData['property']['tenantDetail']['tenantPersonDetail']; let i =index">
+                            <span *ngIf="i > 0">,</span>
+                            {{ tenant['firstname'] ? tenant['firstname'] : '' }}
+                            {{ tenant['middlename'] ? tenant['middlename'] : '' }}
+                            {{ tenant['lastname'] ? tenant['lastname'] : '' }}
+                          </ng-container>
+                        </ng-template>
+                      </td>
+                        
+                      <td>
+                        <div *ngFor="let KittaData of propertiesData['kittaDetails']" class="ifkittakat">
+                         {{ KittaData["tarfa"] ? KittaData["tarfa"] : '' }}
+                        </div>
+                      </td>
+                       <td>
+                        <div *ngFor="let KittaData of propertiesData['kittaDetails']" class="ifkittakat">
+                          {{ KittaData["area"] ? KittaData["area"] : '' }}
+                        </div>
+                      </td>
+                       <td>
+                        <div *ngFor="let KittaData of propertiesData['kittaDetails']" class="ifkittakat">
+                          {{ KittaData["buyerName"] ? KittaData["buyerName"] : '' }}
+                        </div>
+                      </td>
+                       <td>
+                        <div *ngFor="let KittaData of propertiesData['kittaDetails']" class="ifkittakat">
+                          {{ KittaData["mutualAmount"] ? (KittaData["mutualAmount"]+KittaData['houseValuation']| npr | engToNep) : '' }}
+                        </div>
+                      </td>
+                      <ng-container *ngIf="propertiesData['kittaDetails'].length>0">
+                       <td>
+                         <div *ngFor="let KittaData of propertiesData['kittaDetails'];">
+                          <div  *ngIf="propertiesData['property']['PROPERTYID'] == KittaData['propertyId'] " class="ifkittakat">
+                            {{ KittaData['contacttypeid']==1? (KittaData["mutualAmount"]) ? (KittaData["mutualAmount"]| npr | engToNep) : "0":'' }}
+                          </div>
+                         </div>
+                       </td>
+                      <td>
+                         <div *ngFor="let KittaData of propertiesData['kittaDetails'];">
+                          <div  *ngIf="propertiesData['property']['PROPERTYID'] == KittaData['propertyId'] " class="ifkittakat">
+                            {{ KittaData['contacttypeid']==1? (KittaData["houseValuation"]) ? (KittaData["houseValuation"]| npr | engToNep) : "0":'' }}
+                          </div>
+                         </div>
+                       </td>
+                      <td>
+                         <div *ngFor="let KittaData of propertiesData['kittaDetails'];">
+                          <div  *ngIf="propertiesData['property']['PROPERTYID'] == KittaData['propertyId'] " class="ifkittakat">
+                            {{ KittaData['contacttypeid']==2? (KittaData["mutualAmount"]) ? (KittaData["mutualAmount"]| npr | engToNep) : "0":'' }}
+                          </div>
+                         </div>
+                       </td>
+                      <td>
+                         <div *ngFor="let KittaData of propertiesData['kittaDetails'];">
+                          <div  *ngIf="propertiesData['property']['PROPERTYID'] == KittaData['propertyId'] " class="ifkittakat">
+                            {{ KittaData['contacttypeid']==2? (KittaData["houseValuation"]) ? (KittaData["houseValuation"]| npr | engToNep) : "0":'' }}
+                          </div>
+                         </div>
+                       </td>
+                    </ng-container>
+                      <ng-container *ngIf="propertiesData['kittaDetails'].length===0">
+                      <td>
+                        {{ propertiesData['PROPERTYDETAILS']["previousmaa"] ? (propertiesData['PROPERTYDETAILS']["previousmaa"] | npr | engToNep) : "" }}
+                      </td>
+                      <td>
+                        {{ propertiesData['PROPERTYDETAILS']["prevHouseValuation"] ? (propertiesData['PROPERTYDETAILS']["prevHouseValuation"] | npr | engToNep) : "" }}
+                      </td>
+                      <td>
+                        {{ propertiesData['PROPERTYDETAILS']["MUTUALLYAGREEDAMOUNT"] ? (propertiesData['PROPERTYDETAILS']["MUTUALLYAGREEDAMOUNT"] | npr | engToNep) : "" }}
+                      </td>
+                      <td>
+                        {{ propertiesData['PROPERTYDETAILS']["HOUSEVALUATION"] ? (propertiesData['PROPERTYDETAILS']["HOUSEVALUATION"] | npr | engToNep) : "" }}
+                      </td>
+                    </ng-container>
+                       <td>
+                         <div *ngFor="let KittaData of propertiesData['kittaDetails'];">
+                          <div  *ngIf="propertiesData['property']['PROPERTYID'] == KittaData['propertyId'] " class="ifkittakat">
+                            {{ (KittaData["remarks"]) ? (KittaData["remarks"]):'' }}
+                          </div>
+                         </div>
+                       </td>
+                    </tr>
+                  </table>
+                </ng-container>
+              </li>
+              <!--LANDOWNER1 LAND END-->
+
+              <!--LANDOWNER2 LAND-->
+              <li>
+                <p>सट्टापट्टा गरी
+                  {{isLandownerOrganization(likhatPrint['buyerList'],likhatPrint['organizationBuyerList'])!=true?'श्री': ''}}
+                  <b *ngFor="let landowner of likhatPrint['landDetails']['LANDOWNER2']; let i = index" class="dotted">
+                    <span *ngIf="i>0">, </span>
+                    {{(landowner != null && landowner != '')? landowner["PROPERTYDETAILS"]["FIRSTNAME"]: "___________________"}}
+                    {{(landowner != null && landowner != '')? landowner["PROPERTYDETAILS"]["MIDDLENAME"]: "___________________"}}
+                    {{(landowner != null && landowner != '')? landowner["PROPERTYDETAILS"]["LASTNAME"]: "___________________"}}
+                  </b>को नाममा दर्ता हुने जग्गा/घरजग्गाको विवरण:- स्वामित्व
+                  प्राप्त गरेको मिति....................... प्राप्त गरेको किसिम: राजीनामा/ अंशबण्डा/ नामसारी/अन्य </p>
+
+                <ng-container *ngFor="let landData of likhatPrint['landDetails']['LANDOWNER2']">
+                  <table class="table table-bordered d-table table-line-height">
+                    <tr>
+                      <td colspan="9">
+                        <p class="text-center">
+                          जग्गाको विवरण (स्रेस्ता बमोजिम)
+                        </p>
+                        प्रदेश _______________
+                        जिल्ला:-<b>{{landData['PROPERTYDETAILS']['DISTRICTNAME']? landData['PROPERTYDETAILS']['DISTRICTNAME']: ''}}</b>
+                      </td>
+
+                      <td colspan="4" class="text-center">
+                        कित्ताकाट भए
+                      </td>
+                      <td colspan="4" class="text-center">
+                        घरजग्गाको मुल्य (अङ्कमा) <br />
+                        <small>(घर र जग्गाको छुट्टा छुट्टै मुल्य राख्रु पर्ने छ)</small>
+                      </td>
+                      <td>
+                        कैफियत
+                      </td>
+                    </tr>
+                    <tr>
+                      <td rowspan="2">
+                        न. पा./गा. पा
+                      </td>
+                      <td rowspan="2">
+                        वार्ड नं.
+                      </td>
+                      <td rowspan="2">
+                        सिट नं.
+                      </td>
+                      <td rowspan="2" style="min-width: 20px;">
+                        कि. नं. (अङ्क र आक्षरमा)
+                      </td>
+                      <td rowspan="2">
+                        खण्डे
+                      </td>
+                      <td rowspan="2" style="min-width: 72px;">
+                        क्षेत्रफ़ल
+                      </td>
+                      <td rowspan="2">
+                        विरह
+                      </td>
+                      <td rowspan="2">
+                        किसिम
+                      </td>
+                      <td rowspan="2">
+                        मोहीको नाम, थर
+                      </td>
+                      <td rowspan="2" style="width: 85px;">
+                        तर्फ़
+                      </td>
+                      <td rowspan="2" style="width: 85px;">
+                        क्षेत्रफ़ल
+                      </td>
+                      <td rowspan="2" style="width: 150px;">
+                        हुनेवाला जग्गाधनी
+                      </td>
+                      <td rowspan="2" style="width: 85px;">
+                        मूल्य
+                      </td>
+
+                      <td colspan="2" class="text-center">
+                        खरिद
+                      </td>
+                      <td colspan="2" class="text-center">
+                        बिक्री
+                      </td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        जग्गा
+                      </td>
+                      <td>
+                        घर
+                      </td>
+                      <td>
+                        जग्गा
+                      </td>
+                      <td>
+                        घर
+                      </td>
+                      <td></td>
+                    </tr>
+
+                    <tr *ngFor="let propertiesData of likhatPrint['landDetails']['LANDOWNER2']; index as i">
+                      <td>
+                        {{
+                          propertiesData['PROPERTYDETAILS']['MUNICIPALITYNAME'] ? propertiesData['PROPERTYDETAILS']['MUNICIPALITYNAME'] : ""
+                        }}
+                      </td>
+                      <td>
+                        {{
+                          propertiesData['PROPERTYDETAILS']['WARDNO'] ? (propertiesData['PROPERTYDETAILS']['WARDNO'] | engToNep): ""
+                        }}
+                      </td>
+                      <td>
+                        {{
+                            propertiesData['PROPERTYDETAILS']["MAPSHEET1"] ? (propertiesData['PROPERTYDETAILS']["MAPSHEET1"] | engToNep) : ""
+                          }}
+
+                        {{ propertiesData['PROPERTYDETAILS']["MAPSHEET2"] ? (propertiesData['PROPERTYDETAILS']["MAPSHEET2"] | engToNep) : "" }}
+
+                        {{ propertiesData['PROPERTYDETAILS']["MAPSHEET3"] ? (propertiesData['PROPERTYDETAILS']["MAPSHEET3"] | engToNep) : "" }}
+
+                        {{
+                            propertiesData['PROPERTYDETAILS']["MAPSHEET4"] ? (propertiesData['PROPERTYDETAILS']["MAPSHEET4"] | engToNep) : ""
+                          }}
+                      </td>
+                      <td>
+                        {{ propertiesData['PROPERTYDETAILS']["PRESENTPARCLENO"]
+                            ? (propertiesData['PROPERTYDETAILS']["PRESENTPARCLENO"])
+                            : "" }}
+                        <br />
+                        {{ propertiesData['PROPERTYDETAILS']["PRESENTPARCLENO"] | nepToEng | numToWords }}
+                      </td>
+                      <td>
+                        {{ propertiesData['PROPERTYDETAILS']["PARTNO"] ? propertiesData['PROPERTYDETAILS']["PARTNO"]: "" }}
+                      </td>
+                      <td>
+                        {{ propertiesData['PROPERTYDETAILS']["AREA1"] ? (propertiesData['PROPERTYDETAILS']["AREA1"] | engToNep) : "0" }}
+                        -
+                        {{ propertiesData['PROPERTYDETAILS']["AREA2"] ? (propertiesData['PROPERTYDETAILS']["AREA2"] | engToNep) : "0" }}
+                        -
+                        {{ propertiesData['PROPERTYDETAILS']["AREA3"] ? (propertiesData['PROPERTYDETAILS']["AREA3"] | engToNep) : "0" }}
+                        -
+                        {{ propertiesData['PROPERTYDETAILS']["AREA4"] ? (propertiesData['PROPERTYDETAILS']["AREA4"] | engToNep) : "0" }}
+                        <br />
+                        ({{ propertiesData['PROPERTYDETAILS']["AREA5"] ? (propertiesData['PROPERTYDETAILS']["AREA5"] | engToNep): "" }})
+                      </td>
+                      <td>
+                        {{ propertiesData['PROPERTYDETAILS']["LANDUSETYPE_NP"]
+                            ? propertiesData['PROPERTYDETAILS']["LANDUSETYPE_NP"]
+                            : "" }}
+                      </td>
+                      <td>
+                        {{
+                          propertiesData['PROPERTYDETAILS']["LANDTYPENP"] ? propertiesData['PROPERTYDETAILS']["LANDTYPENP"] : ""
+                        }}
+                      </td>
+                      <td>
+                        <ng-template
+                          [ngIf]="propertiesData['PROPERTYDETAILS']['tenantDetail'] && propertiesData['PROPERTYDETAILS']['tenantDetail']['tenantPersonDetail']">
+                          <ng-container
+                            *ngFor="let tenant of propertiesData['PROPERTYDETAILS']['tenantDetail']['tenantPersonDetail']; let i =index">
+                            <span *ngIf="i > 0">,</span>
+                            {{ tenant['firstname'] ? tenant['firstname'] : '' }}
+                            {{ tenant['middlename'] ? tenant['middlename'] : '' }}
+                            {{ tenant['lastname'] ? tenant['lastname'] : '' }}
+                          </ng-container>
+                        </ng-template>
+                      </td>
+                    
+                      <td>
+                        <div *ngFor="let KittaData of propertiesData['kittaDetails']" class="ifkittakat">
+                         {{ KittaData["tarfa"] ? KittaData["tarfa"] : '' }}
+                        </div>
+                      </td>
+                       <td>
+                        <div *ngFor="let KittaData of propertiesData['kittaDetails']" class="ifkittakat">
+                          {{ KittaData["area"] ? KittaData["area"] : '' }}
+                        </div>
+                      </td>
+                       <td>
+                        <div *ngFor="let KittaData of propertiesData['kittaDetails']" class="ifkittakat">
+                          {{ KittaData["buyerName"] ? KittaData["buyerName"] : '' }}
+                        </div>
+                      </td>
+                       <td>
+                        <div *ngFor="let KittaData of propertiesData['kittaDetails']" class="ifkittakat">
+                          {{ KittaData["mutualAmount"] ? (KittaData["mutualAmount"]+KittaData['houseValuation']| npr | engToNep) : '' }}
+                        </div>
+                      </td>
+                      <ng-container *ngIf="propertiesData['kittaDetails'].length>0">
+                       <td>
+                         <div *ngFor="let KittaData of propertiesData['kittaDetails'];">
+                          <div  *ngIf="propertiesData['PROPERTYDETAILS']['PROPERTYID'] == KittaData['propertyId'] " class="ifkittakat">
+                            {{ KittaData['contacttypeid']==1? (KittaData["mutualAmount"]) ? (KittaData["mutualAmount"]| npr | engToNep) : "0":'' }}
+                          </div>
+                         </div>
+                       </td>
+                      <td>
+                         <div *ngFor="let KittaData of propertiesData['kittaDetails'];">
+                          <div  *ngIf="propertiesData['PROPERTYDETAILS']['PROPERTYID'] == KittaData['propertyId'] " class="ifkittakat">
+                            {{ KittaData['contacttypeid']==1? (KittaData["houseValuation"]) ? (KittaData["houseValuation"]| npr | engToNep) : "0":'' }}
+                          </div>
+                         </div>
+                       </td>
+                      <td>
+                         <div *ngFor="let KittaData of propertiesData['kittaDetails'];">
+                          <div  *ngIf="propertiesData['PROPERTYDETAILS']['PROPERTYID'] == KittaData['propertyId'] " class="ifkittakat">
+                            {{ KittaData['contacttypeid']==2? (KittaData["mutualAmount"]) ? (KittaData["mutualAmount"]| npr | engToNep) : "0":'' }}
+                          </div>
+                         </div>
+                       </td>
+                      <td>
+                         <div *ngFor="let KittaData of propertiesData['kittaDetails'];">
+                          <div  *ngIf="propertiesData['PROPERTYDETAILS']['PROPERTYID'] == KittaData['propertyId'] " class="ifkittakat">
+                            {{ KittaData['contacttypeid']==2? (KittaData["houseValuation"]) ? (KittaData["houseValuation"]| npr | engToNep) : "0":'' }}
+                          </div>
+                         </div>
+                       </td>
+                    </ng-container>
+                      <ng-container *ngIf="propertiesData['kittaDetails'].length===0">
+                      <td>
+                        {{ propertiesData['PROPERTYDETAILS']["previousmaa"] ? (propertiesData['PROPERTYDETAILS']["previousmaa"] | npr | engToNep) : "" }}
+                      </td>
+                      <td>
+                        {{ propertiesData['PROPERTYDETAILS']["prevHouseValuation"] ? (propertiesData['PROPERTYDETAILS']["prevHouseValuation"] | npr | engToNep) : "" }}
+                      </td>
+                      <td>
+                        {{ propertiesData['PROPERTYDETAILS']["MUTUALLYAGREEDAMOUNT"] ? (propertiesData['PROPERTYDETAILS']["MUTUALLYAGREEDAMOUNT"] | npr | engToNep) : "" }}
+                      </td>
+                      <td>
+                        {{ propertiesData['PROPERTYDETAILS']["HOUSEVALUATION"] ? (propertiesData['PROPERTYDETAILS']["HOUSEVALUATION"] | npr | engToNep) : "" }}
+                      </td>
+                    </ng-container>
+                       <td>
+                         <div *ngFor="let KittaData of propertiesData['kittaDetails'];">
+                          <div  *ngIf="propertiesData['PROPERTYDETAILS']['PROPERTYID'] == KittaData['propertyId'] " class="ifkittakat">
+                            {{ (KittaData["remarks"]) ? (KittaData["remarks"]):'' }}
+                          </div>
+                         </div>
+                       </td>
+                    </tr>
+                  </table>
+                </ng-container>
+              </li>
+              <!--LANDOWNER2 LAND END-->
+              <!--LAND DETAILS-->
+
+              <!-- <li *ngIf="data.orgPratinidhiList.length > 0" class="after-pagebreak">
+                <p>निवेदकको विवरण (संस्था)</p>
+                <table class="table table-bordered table-responsive d-table">
+                  <thead>
+                    <tr>
+                      <td>
+                        संस्थाको नाम (देवनागरीमा)
+                      </td>
+                      <td>
+                        संस्थाको नाम (अङ्ग्रेजीमा)
+                      </td>
+                      <td>
+                        ठेगाना
+                      </td>
+                      <td>
+                        दर्ता मिति
+                      </td>
+                      <td>
+                        रजिस्ट्रेशन नं.
+                      </td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let applicantOrg of data.orgPratinidhiList">
+                      <tr>
+                        <td>
+                          {{ applicantOrg['organizationname'] }}
+                        </td>
+                        <td>
+                          {{ applicantOrg['getOrganizationnameenglish'] }}
+                        </td>
+                        <td *ngIf="applicantOrg['municipalityvdc'] == 'नखुलेको'">{{ applicantOrg['municipalityvdc'] }}
+                        </td>
+                        <td *ngIf="applicantOrg['municipalityvdc'] != 'नखुलेको'">
+                          {{ applicantOrg['municipalityvdc'] }} -
+                          {{ applicantOrg['wardno'] | engnep: applicantOrg['wardno'] | engToNep }},
+                          {{ applicantOrg['district'] }}
+                        </td>
+                        <td>
+                          {{ applicantOrg['registrationdate'] | engToNep }}
+                        </td>
+                        <td>
+                          {{ applicantOrg['registrationno'] }}
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </li> -->
+
+              <!-- <li *ngIf="this.guardianList.length > 0">
+                <p>स‌ंरक्षक /माथबर भए निजको विवरण</p>
+                <table class="table table-bordered table-responsive d-table">
+                  <thead>
+                    <tr>
+                      <td>
+                        नाम, थर (देवनागरीमा)
+                      </td>
+                      <td>
+                        नाम, थर (अङ्ग्रेजीमा)
+                      </td>
+                      <td>
+                        ठेगाना
+                      </td>
+                      <td>
+                        जन्म मिति
+                      </td>
+                      <td>
+                        लिङ्ग
+                      </td>
+                      <td>
+                        पति/पत्नीको नाम
+                      </td>
+                      <td>
+                        बाबु र आमाको नाम
+                      </td>
+                      <td>
+                        बाजे र बजैको नाम
+                      </td>
+                      <td>
+                        नागरिकता नं., मिति र कार्यालय
+                      </td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        &nbsp;
+                      </td>
+                      <td>
+                        &nbsp;
+                      </td>
+                      <td>
+                        &nbsp;
+                      </td>
+                      <td>
+                        &nbsp;
+                      </td>
+                      <td>
+                        &nbsp;
+                      </td>
+                      <td>
+                        &nbsp;
+                      </td>
+                      <td>
+                        &nbsp;
+                      </td>
+                      <td>
+                        &nbsp;
+                      </td>
+                      <td>
+                        &nbsp;
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li> -->
+
+              <!-- <li *ngIf="this.nomineeList.length > 0">
+                <p>बारेस भए निजको विवरण</p>
+                <table class="table table-bordered table-responsive d-table">
+                  <thead>
+                    <tr>
+                      <td>
+                        नाम, थर (देवनागरीमा)
+                      </td>
+                      <td>
+                        नाम, थर (अङ्ग्रेजीमा)
+                      </td>
+                      <td>
+                        ठेगाना
+                      </td>
+                      <td>
+                        जन्म मिति
+                      </td>
+                      <td>
+                        लिङ्ग
+                      </td>
+                      <td>
+                        पति/पत्नीको नाम
+                      </td>
+                      <td>
+                        बाबु र आमाको नाम
+                      </td>
+                      <td>
+                        बाजे र बजैको नाम
+                      </td>
+                      <td>
+                        नागरिकता नं., मिति र कार्यालय
+                      </td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let nominee of nomineeList">
+                      <td>
+                        {{ nominee['firstname'] }} {{ nominee['middlename'] }} {{ nominee['lastname'] }}
+                      </td>
+                      <td>
+                        {{ nominee['firstnameenglish'] }} {{ nominee['lastnameenglish'] }}
+                      </td>
+                      <td>
+                        {{ nominee['munvdcname'] }} -
+                        {{ nominee['wardnumber'] | engnep: nominee['wardnumber'] | engToNep }},
+                        {{ nominee['districtname'] }}
+                      </td>
+                      <td>
+                        {{ nominee['dateofbrith'] | engToNep }}
+                      </td>
+                      <td>
+                        {{ nominee['gender'] }}
+                      </td>
+                      <td>
+                        <span
+                          *ngIf="!nominee['husbandfirstname'] && !nominee['husbandmiddlename'] && !nominee['husbandlastname']"
+                          class="empty">-</span>
+                        {{ nominee['husbandfirstname'] }} {{ nominee['husbandmiddlename'] }}
+                        {{ nominee['husbandlastname'] }}
+                      </td>
+                      <td>
+                        {{ nominee['fatherfirstname'] }} {{ nominee['fathermiddlename'] }}
+                        {{ nominee['fatherlastname'] }} <span *ngIf="nominee['motherfirstname']"> - </span>
+                        {{ nominee['motherfirstname'] }}
+                        {{ nominee['mothermiddlename'] }} {{ nominee['motherlastname'] }}
+                      </td>
+                      <td>
+                        {{ nominee['grandfatherfirstname'] }} {{ nominee['grandfathermiddlename'] }}
+                        {{ nominee['grandfatherlastname'] }}
+                      </td>
+                      <td>
+                        {{ nominee['idno'] }}, {{ npDateConverter.ADtoBS(nominee['issuedate']) | engToNep}},
+                        {{ nominee['issuingagency'] }}, {{ nominee['idissueplace'] }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+
+        <div class="pagebreak"></div>
+
+        <div class="container-fluid after-pagebreak">
+          <div class="row">
+            <p><b><u>संलग्न प्रमाणहरुः-</u></b></p>
+            <table class="table-borderless d-table w-100">
+              <tr>
+                <td>
+                  <p>(क) चालु ............आ.व.को मालपोत रसिदको प्रतिलिपि थान -१</p>
+                  <p>(ग) जग्गाधनी दर्ता प्रमाण पूर्जाको प्रतिलिपि थान -१</p>
+                  <p>(ङ) अंशियारहरुको नागरिकताको प्रमाणपत्रको प्रतिलिपि थान -४</p>
+                  <p>(छ) नाबालक भए जन्मदर्ता प्रमाणपत्रको प्रतिलिपि थान</p>
+                </td>
+                <td>
+                  <p>(ख) ..................... ले गरिदिएको घरबाटोको सिफारिस पत्र सक्कल थान -१</p>
+                  <p>(घ) करचुक्ता प्रमाणपत्रको प्रतिलिपि थान -१</p>
+                  <p>(च) अधिकृत वारिस भए अधिकृत वारिसनामा सक्कल थान -१</p>
+                  <p>(ज) संरक्षक/माथबर भए निजको नागरिकताको प्रमाण-पत्रको प्रतिलिपि थान -१</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="row">
+            <p class="text-center w-100"><b>कार्यालय प्रयोजनको लागि</b></p>
+            <table class="table table-bordered d-table mb-5">
+              <tr>
+                <td>
+                  <p><b><u>लेखिए बमोजिम श्रेस्ता कायम छ /छैन</u></b></p>
+                  <p>कर्मचारीको दस्तखत ...................................
+                    नाम.................................................. </p>
+                  <p>............................................... पद
+                    ..............................................मिति</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p><b>लेखिएको कि.नं.....................................................को जग्गा/घरजग्गा रोक्‍का
+                      छ/छैन।</b></p>
+                  <p>कर्मचारीको दस्तखत ...................................
+                    नाम.................................................. </p>
+                  <p>............................................... पद
+                    ..............................................मिति</p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p><b>लेखिएको जग्गाको न्युनतम मुल्याङ्कन रु …............……………….हुने देखिन्छ।</b></p>
+                  <p>कर्मचारीको दस्तखत ...................................
+                    नाम.................................................. </p>
+                  <p>............................................... पद
+                    ..............................................मिति</p>
+                </td>
+              </tr>
+            </table>
+            </div>
+
+            <div class="row" *ngIf="kittaCountArr.length > 0">
+              <table class="table d-table table-bordered">
+                <tr>
+                  <td colspan="12">
+                    <p>
+                      <b>
+                        <u>
+                          कित्ताकाट गर्नुपर्ने भएमा
+                        </u>
+                      </b>
+                    </p>
+                    <p>
+                      <b>
+                        श्री नापी कार्यालय :-________________________
+                      </b>
+                    </p>
+                    <p>
+                      लिखत बमोजिम नियमानुसार कित्ताकाट गरि पठाई निदहुन अनुरोध छ ।
+                    </p>
+                    <p>
+                      कर्मचारीको दस्तखत:-___________________ नाम
+                      __________________________ पद _____________________ मिति
+                      ____________________
+                    </p>
+                    <p>
+                      <b>
+                        कित्ताकाटको विवरण (नापी कार्यालयले भर्ने)
+                      </b>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="12">
+                    <p>
+                      अमिन/सभ्रेक्षक श्री ____________________ नियमानुसार कित्ताकाट
+                      गरी पेश गर्ने ।
+                    </p>
+                    <p>
+                      आदेश दिनेको दस्तखत:-_______________________ नाम
+                      __________________________ पद _______________________ मिति
+                      ______________________
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    नक्सा/सिट नं
+                  </td>
+                  <td colspan="2">
+                    साविक
+                  </td>
+                  <td colspan="6">
+                    हाल
+                  </td>
+                  <td [attr.rowspan]="likhatPrint['kittaCount'] + 2">
+                    <p>
+                      कित्ताकाट गर्नेको
+                    </p>
+                    <p>
+                      दस्तखत:
+                    </p>
+                    <p>
+                      नाम:
+                    </p>
+                    <p>
+                      पद:
+                    </p>
+                  </td>
+                  <td rowspan="5">
+                    <p>
+                      रुजी गर्नेको
+                    </p>
+                    <p>
+                      दस्तखत:
+                    </p>
+                    <p>
+                      नाम:
+                    </p>
+                    <p>
+                      पद:
+                    </p>
+                  </td>
+                  <td rowspan="5">
+                    <p>
+                      प्रमाणित गर्नेको
+                    </p>
+                    <p>
+                      दस्तखत:
+                    </p>
+                    <p>
+                      नाम:
+                    </p>
+                    <p>
+                      पद:
+                    </p>
+                    <p>
+                      कार्यालयको छाप:
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    कि. नं.
+                  </td>
+                  <td>
+                    क्षे. फ.
+                  </td>
+                  <td>
+                    तर्फ़
+                  </td>
+                  <td>
+                    कि. नं.
+                  </td>
+                  <td>
+                    क्षे. फ.
+                  </td>
+                  <td>
+                    कायम हुने जग्गाधनी
+                  </td>
+                </tr>
+                <tr class="empty-cells" *ngFor="let count of kittaCountArr">
+                  <td>&nbsp;{{ count[""] }}</td>
+                  <td>&nbsp;{{ count[""] }}</td>
+                  <td>&nbsp;{{ count[""] }}</td>
+                  <td>&nbsp;{{ count[""] }}</td>
+                  <td>&nbsp;{{ count[""] }}</td>
+                  <td>&nbsp;{{ count[""] }}</td>
+                </tr>
+                <tr>
+                  <td colspan="12">
+                    <p>
+                      <b>
+                        <u>
+                          रोहवर:
+                        </u>
+                      </b>
+                    </p>
+                    <p>
+                      <span>
+                        बिक्रीकर्ताको दस्तखत र मिति ________________________
+                      </span>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <span>
+                        खरिदकर्ताको दस्तखत र मिति: ___________________________
+                      </span>
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="12">
+                    <p>
+                      श्री मालपोत कार्यालय ________________________
+                    </p>
+                    <p>
+                      लिखत बमोजिम नियमानुसार कित्ताकाट गरी पठाएको व्यहोरा अनुरोध छ ।
+                    </p>
+                    <p>
+                      आदेश दिनेको दस्तखत:-_______________________ नाम
+                      __________________________ पद _______________________ मिति
+                      ______________________
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          <div class="row">
+            <table class="table table-responsive d-table table-borderless">
+              <tr>
+                <td>
+                  <div class="border p-2">
+                    <p>रजिष्ट्रेशन.नं. ...................... </p>
+                    <p>पारित मितिः- ....................</p>
+                    <p>टोकन/दर्ता नं ...................</p>
+                    <p>मिति:-............................</p>
+                    <p>कारोबार (थैली) अङ्‌क रु.....................</p>
+                    <p>रजिष्‍ट्रेशन दस्तुर रु...............</p>
+                    <p>पूँजिगत लाभकर रु................</p>
+                    <p>अन्य कर/दस्तुर रु.................</p>
+                    <p>रसिद नं. .....................</p>
+                  </div>
+                </td>
+                <td align="center">
+                  <p>नेपाल सरकार</p>
+                  <p>भूमि व्यवस्था, सहकारी तथा गरिबी निवारण मन्त्रालय</p>
+                  <p>भूमि व्यवस्थापन तथा अभिलेख विभाग</p>
+                  <p>मालपोत कार्यालयः<b><u>{{likhatPrint['otherDetails'][0]['officename']}}</u></b></p>
+                  <p class="mb-4">डोरमुकाम-------------------------</p>
+                  <p>( कार्यालयको छाप )</p>
+                </td>
+                <td style="width: 33.33%">
+                  <div class="border p-2">
+                    <p><b><u>स्वीकृत (पारित) गर्नेको </u></b></p>
+                    <p>दस्तखत र मिति:..........................</p>
+                    <p>नाम:..........................</p>
+                    <p>पदः..........................</p>
+                    <p>यो लिखतको व्यहोरा लिने दिने दुवै पक्षलार्इ पढेर सुनाउँदा लिखत बमोजिम कारोबार गरेको मन्जुर
+                      गरेकोले लिखत पारित (स्वीकृत) गर्नको लागि पेश गरेको छु। </p>
+                    <p><b><u>फाँटवालाको</u></b></p>
+                    <p>दस्तखत र मिति:..........................</p>
+                    <p>नाम:……………………………. पद:………………………..</p>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- <ng-template #hasaPageBreak>
+          <div class="pagebreak"></div>
+          <section class="after-pagebreak"></section>
+          <p>&nbsp;</p>
+        </ng-template> -->
+      </div>
+    </ng-template>
+  </div>
+</div>

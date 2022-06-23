@@ -4,27 +4,29 @@ import { AppComponent } from './app.component';
 import { AuthRoutingModule } from './auth/auth-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
 const routes: Routes = [{
   path:'auth',
   loadChildren:()=>AuthRoutingModule
 },
 {
-  path:'login',
+  path:'',
   component:LoginComponent
 },
 {
-  path:'auth2',
-  component:AppComponent
-},
+   path:'forgetpassword/:data',
+   component:ForgetpasswordComponent,
+   data:{'asd':'dasf'}
+  },
 {
-  path:'',
+  path:'auth2',
   component:AppComponent
 }
 ];
 
 @NgModule({
   imports: [
-       RouterModule.forRoot(routes)  // .../#/crisis-center/,
+       RouterModule.forRoot(routes,{useHash:true})  // .../#/crisis-center/,
       ],
   exports: [RouterModule,
        ReactiveFormsModule
