@@ -9,6 +9,8 @@ import { AppHttpClient } from './service/app-http-client.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
+import { AuthModule } from './auth/auth.module';
+import { ExampleModuleModule } from './example-module/example-module.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,14 +18,17 @@ import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.compone
     ForgetpasswordComponent,
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
+     BrowserModule,
+     AppRoutingModule,
      FormsModule,
      ReactiveFormsModule,
      HttpClientModule,
-     BrowserAnimationsModule
+     BrowserAnimationsModule,
+     AuthModule,
+     ExampleModuleModule
   ],
   providers: [AppService,AppHttpClient],
   bootstrap: [AppComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

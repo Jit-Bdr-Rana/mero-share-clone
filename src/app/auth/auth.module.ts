@@ -21,7 +21,7 @@ import { BrowserModule } from '@angular/platform-browser';
     ReactiveFormsModule,
      FormsModule,
   ],
-    schemas:[CUSTOM_ELEMENTS_SCHEMA ]
-
+    schemas:[CUSTOM_ELEMENTS_SCHEMA ],
+bootstrap: [AuthComponent],
 })
 export class AuthModule { }

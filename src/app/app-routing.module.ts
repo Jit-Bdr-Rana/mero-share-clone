@@ -5,6 +5,7 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
+import { ExampleRoutingModule } from './example-module/example-module.routing';
 const routes: Routes = [{
   path:'auth',
   loadChildren:()=>AuthRoutingModule
@@ -21,6 +22,10 @@ const routes: Routes = [{
 {
   path:'auth2',
   component:AppComponent
+},
+{
+  path:'example',
+  loadChildren:()=>ExampleRoutingModule
 }
 ];
 
